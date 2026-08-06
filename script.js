@@ -25,6 +25,9 @@ cells.forEach((cell, index) => {
 function check_victory(x, y) {
   if (Horizontal_Check(y) || Vertical_Check(x) || Diagonal_Check())
     console.log("VICTORY")
+  else if (turnNum === 8) {
+    console.log("DRAW")
+  }
 }
 
 function Horizontal_Check(y) {
