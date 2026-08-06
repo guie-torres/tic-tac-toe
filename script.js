@@ -1,5 +1,9 @@
 const cells = document.querySelectorAll(".cell")
-const colors = ["blue", "red"]
+const colors = ["blue", "red", "gray"]
+const endText = document.querySelector(".end-text")
+
+const endTexts = ["Blue Won!", "Red Won!", "Draw"]
+
 var turnNum = 0
 var cellStatuses = [
   [0, 0, 0],
@@ -23,9 +27,11 @@ cells.forEach((cell, index) => {
 })
 
 function check_victory(x, y) {
-  if (Horizontal_Check(y) || Vertical_Check(x) || Diagonal_Check())
+  if (Horizontal_Check(y) || Vertical_Check(x) || Diagonal_Check()) {
     console.log("VICTORY")
-  else if (turnNum === 8) {
+    Next_Round(turnNum % 2)
+  } else if (turnNum === 8) {
+    Next_Round(2)
     console.log("DRAW")
   }
 }
@@ -67,4 +73,24 @@ function Diagonal_Check() {
     cellStatuses[0][2] === p
 
   return upDown || downUp
+}
+
+function Next_Round(status) {
+  cells.forEach((cell) => {
+    cell.style.backgroundColor = "rgb(255, 255, 255)"
+  })
+
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      cellStatuses[i][j] = 0
+    }
+  }
+
+  turnNum = -1
+
+  endText.textContent = endTexts[status]
+  endText.style.color = colors[status]
+  endText.classList.remove("hide")
+
+  console.log(cellStatuses)
 }
