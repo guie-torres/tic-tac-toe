@@ -1,7 +1,13 @@
 const cells = document.querySelectorAll(".cell")
-const colors = ["blue", "red", "gray"]
 const endText = document.querySelector(".end-text")
+const scoreTexts = [
+  document.querySelector("#score-blue"),
+  document.querySelector("#score-red"),
+]
 
+const scores = [0, 0]
+
+const colors = ["blue", "red", "gray"]
 const endTexts = ["Blue Won!", "Red Won!", "Draw"]
 
 var turnNum = 0
@@ -92,5 +98,8 @@ function Next_Round(status) {
   endText.style.color = colors[status]
   endText.classList.remove("hide")
 
-  console.log(cellStatuses)
+  if (status === 2) return
+
+  scores[status] += 1
+  scoreTexts[status].textContent = scores[status]
 }
